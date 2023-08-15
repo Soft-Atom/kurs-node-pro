@@ -15,7 +15,7 @@ const getNumArg = (i) => {
 
 	res = Number(res);
 	if (!Number.isFinite(res)){
-		console.log(`${i-1} аргумент должен быть числом`);
+		console.log(`${i-1} параметр должен быть числом`);
 		return undefined;
 	}
 
@@ -29,7 +29,7 @@ const man = () => {
 }
 
 const funcCall = (f, a, b) => {
-	if (a && b) {
+	if (a !==undefined && b !== undefined) {
 		console.log(f(a, b));
 	} else {
 		man();
