@@ -2,11 +2,11 @@
 class MyTimer {
 	
 	constructor() {
-		this.myTime = new Map([
-			['h', undefined],
-			['m', undefined],
-			['s', undefined]
-		])
+		this.myTime = {
+			'h': undefined,
+			'm': undefined,
+			's': undefined
+		}
 		this.error = false;
 	}
 
@@ -32,10 +32,10 @@ node timer.js 11s - установит таймер на 11 секунд`
 	}
 
 	getMs(){
-		for (const [key, val] of this.myTime.entries()) {
-			if (val === undefined) this.myTime.set(key, 0);
+		for (const key in this.myTime) {
+			if (this.myTime[key] === undefined)  this.myTime[key] = 0;
 		}
-		return (this.myTime.get('h') * 60 + this.myTime.get('m') * 60 + this.myTime.get('s')) * 1000
+		return (this.myTime['h'] * 60 + this.myTime['m'] * 60 + this.myTime['s']) * 1000
 	}
 
 	getValue(p, index) {
@@ -43,25 +43,24 @@ node timer.js 11s - установит таймер на 11 секунд`
 		if (!Number.isFinite(val)) {
 			const msg =`Значение параметра ${index} имеет неверный формат`;
 			this.emitError(msg);
-			return ;
+			return;
 		}
 		return val;
 	}
 
 	setParamByName(paramName, p, index) {
-		if (this.myTime.get(paramName)!== undefined) {
+		if (this.myTime[paramName] !== undefined) {
 			const msg = `Попытка повторно задать параметр ${paramName}`;
 			this.emitError(msg);
 			return;
 		}
-		const val = this.getValue(p, index);
-		this.myTime.set(paramName, val);
+		this.myTime[paramName] = this.getValue(p, index);
 	}
 
 	setParam(p, index){
 		if(p === undefined) return;
 		const paramName = p.substr(-1, 1);
-		if (!this.myTime.has(paramName)){
+		if (! paramName in this.myTime){
 			const msg = `Значение параметра ${index} имеет неверный формат`;
 			this.emitError(msg);
 		}
@@ -72,19 +71,18 @@ node timer.js 11s - установит таймер на 11 секунд`
 		if (p1 === undefined) {
 			const msg = 'Hе указан ни один параметр';
 			this.emitError(msg);
-			return;
+			return 0;
 		}
 		this.setParam(p1, 1);
 		this.setParam(p2, 2);
 		this.setParam(p3, 3);
-		if (this.error) return ;
 		return this.getMs();
 	}
 
 	exec() {
 		const input = this.get();
 		const ms = this.prepare(input);
-		if(!(ms === undefined)) {
+		if(!this.error) {
 			setTimeout(()=>{
 				console.log('Timer')
 			}, ms)
