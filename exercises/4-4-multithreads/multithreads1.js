@@ -3,7 +3,7 @@ const perfFunc = require('./perfFunc');
 
 async function main() {
 	try {
-		console.log(await getCount(1, 300_000));
+		console.log(await getCount(1, 300_000_003));
 	} catch(e) {
 		if (e instanceof Error) console.log(e.message);
 	}
