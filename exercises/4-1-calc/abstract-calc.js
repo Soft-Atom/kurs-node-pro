@@ -24,7 +24,7 @@ class AbstractCalc {
 			this._errors.push('Не указан Метод');		
 		} else if (!Object.hasOwn(this._calcMethods, this._method)) {
 			this._errors.push(
-				`Введен несуществующий Метод: ${this._method}. Допускается: ${Object.keys(this._calcMethods).join(', ')}`
+				`Введен несуществующий Метод: ${this._method}. Допускается: ${this._getAllMethods()}`
 			)
 		}
 
@@ -44,8 +44,12 @@ class AbstractCalc {
 	_generateErrors() {
 		this._errors.forEach(e => console.error(`ОШИБКА: ${e}`));
 		console.log(`Использование: node calc.js [Метод] [Аргументы]
-		Аргументы - должны быть числами
-		Метод - допускается: ${Object.keys(this._calcMethods).join(', ')}`)
+		Метод - допускается: ${this._getAllMethods()}
+		Аргументы - должны быть числами`)
+	}
+
+	_getAllMethods() {
+		return Object.keys(this._calcMethods).join(', ');
 	}
 
 	_calc() { }

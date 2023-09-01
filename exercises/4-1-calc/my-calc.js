@@ -6,10 +6,6 @@ class MyCalc extends AbstractCalc{
 		'multiply': require('./multiply')
 	}
 
-	constructor(method, ...numbers) {
-		super(method, ...numbers);
-	}
-
 	_calc() {
 		const method = this._calcMethods[this._method];
 		console.log(method(...this._numbers));

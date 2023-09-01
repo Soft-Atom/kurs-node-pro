@@ -1,4 +1,6 @@
-const MyTimer = require('./MyTimer')
+const MyTimer = require('./my-timer')
 
-const myTimer = new MyTimer();
+const [ ,,...args ] = process.argv;
+
+const myTimer = new MyTimer(args.join(' '));
 myTimer.exec();
