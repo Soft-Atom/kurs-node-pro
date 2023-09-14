@@ -14,7 +14,7 @@ async function main() {
 		])).reduce((acc,el) => acc += el, 0);
 		console.log(res);
 	} catch(e) {
-		if (e instanceof Error) console.log(e.message);
+		if (e instanceof Error) console.error(e.message);
 	}
 }
 
