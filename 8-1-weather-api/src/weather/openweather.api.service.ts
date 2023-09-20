@@ -22,10 +22,7 @@ export class OpenWeatherAPIService implements IWeatherAPIService {
 		const instanceFromRes = plainToClass(OpenweatherResDto, res);
 		const errors = await validate(instanceFromRes);
 
-		if (errors.length) {
-			console.log(errors);
-			return HTTPError500();
-		}
+		if (errors.length) return HTTPError500();
 		return this.convertToIWeatherResponseDTO(instanceFromRes);
 	}
 

@@ -21,7 +21,6 @@ export class MyFetch {
 	private async myFetch(init?: RequestInit): Promise<Response | HTTPError> {
 		try {
 			const res = await fetch(this.url, init);
-			console.log(res);
 			return res.json();
 		} catch (e) {
 			return HTTPError500();
