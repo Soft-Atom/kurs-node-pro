@@ -32,11 +32,11 @@ export class App {
 		});
 	}
 
-	useMiddleware(): void {
+	private useMiddleware(): void {
 		this.express.use(express.json());
 	}
 
-	useRoutes(): void {
+	private useRoutes(): void {
 		this.controllersList.forEach((controller) => {
 			this.express.use(controller.path, controller.router);
 		});

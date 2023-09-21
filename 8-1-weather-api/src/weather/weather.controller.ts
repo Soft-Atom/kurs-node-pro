@@ -10,7 +10,9 @@ import { inject, injectable } from 'inversify';
 
 @injectable()
 export class WeatherController extends BaseController implements IWeatherController {
-	routes: IBaseRoute[] = [{ path: '/get-by-city', method: 'get', callback: this.getByCity }];
+	protected routes: IBaseRoute[] = [
+		{ path: '/get-by-city', method: 'get', callback: this.getByCity },
+	];
 
 	constructor(@inject(TYPES.IWeatherAPIService) private weatherAPIService: IWeatherAPIService) {
 		super('/weather');
