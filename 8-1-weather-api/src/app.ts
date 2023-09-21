@@ -11,16 +11,12 @@ export class App {
 	private port: number;
 	private server: Server;
 
-	//private controllersList: IBaseController[];
-
 	constructor(
-		// @inject(TYPES.FactoryControllersList) controllersListFactory: () => IBaseController[],
 		@multiInject(TYPES.IBaseController) private controllersList: IBaseController[],
 		@inject(TYPES.IExceptionFilter) private exceptionFilter: IExceptionFilter,
 	) {
 		this.express = express();
 		this.port = 8000;
-		// this.controllersList = controllersListFactory();
 	}
 
 	run(): void {
