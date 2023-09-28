@@ -1,0 +1,7 @@
+/node_modules
+/build
+/.env
+/.eslintrc
+/.prettierrc
+/nodemon.json
+/src/-do not use-controllers-list.factory.ts
